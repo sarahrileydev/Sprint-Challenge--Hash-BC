@@ -26,6 +26,17 @@ def proof_of_work(last_proof):
     proof = 0
     #  TODO: Your code here
 
+    # encode() : Converts the string into bytes to be acceptable by hash function.
+    # hexdigest() : Returns the encoded data in hexadecimal format.
+    # For example: use sha256() to create a SHA-256 hash object. 
+    # You can now feed this object with bytes-like objects (normally bytes) using the 
+    # update() method. At any point you can ask it for the digest of the concatenation 
+    # of the data fed to it so far using the digest() or hexdigest() methods.
+    block_string = hashlib.sha256(str(last_proof).encode()).hexdigest()
+    proof = last_proof
+    while not valid_proof(block_string, proof):
+        proof += 1
+
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
 
@@ -40,7 +51,9 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    guess = str(proof).encode()
+    guess_hash = hashlib.sha256(guess).hexdigest()
+    return guess_hash[:6] == last_hash[-6:]
 
 
 if __name__ == '__main__':
