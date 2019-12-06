@@ -23,7 +23,7 @@ def proof_of_work(last_proof):
     start = timer()
 
     print("Searching for next proof")
-    proof = 0
+    # proof = 0
     #  TODO: Your code here
 
     # encode() : Converts the string into bytes to be acceptable by hash function.
